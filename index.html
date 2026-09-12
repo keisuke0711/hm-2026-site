@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>はる｜アートメイク看護師</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF;
+  --veil:#F3EFF1;
+  --veil-deep:#E9E2E6;
+  --ink:#2A262A;
+  --muted:#877E84;
+  --plum:#6E4F5E;
+  --line-green:#06C755;
+  --hair:#DED5DA;
+  --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho","Noto Serif CJK JP","Noto Serif JP",serif;
+  --gothic:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP","Noto Sans CJK JP",sans-serif;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--gothic);font-size:15px;line-height:2.0;
+  -webkit-font-smoothing:antialiased;font-feature-settings:"palt";
+}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+.wrap{max-width:740px;margin:0 auto;padding:0 24px;}
+.narrow{max-width:600px;margin:0 auto;}
+
+/* ---- axis: 眉の左右対称を構造に ---- */
+.axis{position:relative;}
+.axis::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:var(--hair);opacity:.5;
+}
+
+h2.head{
+  font-family:var(--mincho);font-weight:500;font-size:23px;line-height:1.7;
+  text-align:center;margin:0 0 8px;letter-spacing:.06em;
+}
+.head-ja{
+  text-align:center;color:var(--muted);font-size:12px;letter-spacing:.16em;
+  margin:0 0 40px;
+}
+section{padding:82px 0;}
+section.tint{background:var(--veil);}
+
+/* ---- hero ---- */
+.hero{padding:0;position:relative;background:var(--veil);}
+.hero-inner{max-width:740px;margin:0 auto;padding:96px 24px 84px;text-align:center;}
+.hero .portrait{
+  width:190px;height:190px;margin:0 auto 34px;border-radius:50%;
+  background:var(--veil-deep);border:1px dashed #C6B7BF;
+  display:flex;align-items:center;justify-content:center;
+  color:#A2909A;font-size:11px;letter-spacing:.1em;text-align:center;line-height:1.8;
+}
+.hero h1{
+  font-family:var(--mincho);font-weight:400;font-size:15px;letter-spacing:.3em;
+  margin:0 0 22px;color:var(--muted);
+}
+.hero .catch{
+  font-family:var(--mincho);font-size:29px;line-height:1.95;font-weight:500;
+  margin:0 0 26px;letter-spacing:.08em;
+}
+.hero .place{font-size:12px;letter-spacing:.22em;color:var(--muted);margin:0 0 40px;}
+
+.btn-line{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--line-green);color:#fff;text-decoration:none;
+  font-weight:700;font-size:15px;letter-spacing:.06em;
+  padding:17px 44px;border-radius:999px;
+  box-shadow:0 6px 22px rgba(6,199,85,.22);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.btn-line:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(6,199,85,.28);}
+.btn-line:focus-visible{outline:2px solid var(--plum);outline-offset:4px;}
+.btn-note{display:block;margin-top:14px;font-size:12px;color:var(--muted);letter-spacing:.04em;}
+
+/* ---- award ---- */
+.award{
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  padding:26px 0;text-align:center;
+}
+.award .t{font-family:var(--mincho);font-size:14px;line-height:2.1;letter-spacing:.04em;}
+.award .r{color:var(--plum);font-weight:500;}
+
+/* ---- profile ---- */
+.profile p{margin:0 0 22px;}
+.profile p:last-child{margin-bottom:0;}
+.sig{text-align:right;font-family:var(--mincho);font-size:15px;letter-spacing:.2em;margin-top:34px;color:var(--muted);}
+
+/* ---- cases ---- */
+.cases{display:flex;flex-wrap:wrap;margin:0 -8px;}
+.case{
+  width:calc(50% - 16px);margin:0 8px 16px;position:relative;
+  background:var(--paper);border:1px dashed #C6B7BF;
+}
+.case::before{content:"";display:block;padding-top:100%;}
+.case span{
+  position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;
+  color:#A2909A;font-size:11px;letter-spacing:.08em;text-align:center;line-height:1.9;
+}
+.case-note{
+  margin-top:22px;font-size:11.5px;line-height:1.95;color:var(--muted);
+  border-left:2px solid var(--hair);padding-left:14px;
+}
+
+/* ---- steps ---- */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;}
+.steps li{
+  counter-increment:s;position:relative;padding:0 0 30px 46px;
+}
+.steps li::before{
+  content:counter(s);position:absolute;left:0;top:2px;
+  width:27px;height:27px;border-radius:50%;border:1px solid var(--plum);
+  color:var(--plum);font-size:12px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mincho);
+}
+.steps li::after{
+  content:"";position:absolute;left:13px;top:33px;bottom:4px;width:1px;background:var(--hair);
+}
+.steps li:last-child{padding-bottom:0;}
+.steps li:last-child::after{display:none;}
+.steps .st{font-weight:500;display:block;margin-bottom:2px;}
+.steps .sd{font-size:13px;color:var(--muted);line-height:1.9;}
+
+/* ---- about artmake ---- */
+.dl{margin:0;}
+.dl dt{font-family:var(--mincho);font-size:16px;margin:0 0 6px;letter-spacing:.04em;}
+.dl dd{margin:0 0 28px;font-size:14.5px;color:#413C41;}
+.dl dd:last-child{margin-bottom:0;}
+
+/* ---- cautions ---- */
+.cau{margin-bottom:30px;}
+.cau h3{
+  font-family:var(--mincho);font-size:15px;font-weight:500;margin:0 0 14px;
+  padding-bottom:10px;border-bottom:1px solid var(--hair);letter-spacing:.05em;
+}
+.cau ul{margin:0;padding:0;list-style:none;}
+.cau li{position:relative;padding-left:18px;font-size:14px;margin-bottom:7px;line-height:1.85;}
+.cau li::before{content:"";position:absolute;left:2px;top:13px;width:5px;height:1px;background:var(--plum);}
+.cau.soft li::before{background:var(--muted);}
+.cau-tail{font-size:13px;color:var(--muted);margin-top:16px;}
+
+/* ---- timeline ---- */
+.tl{margin:18px 0 0;}
+.tl div{display:flex;gap:16px;padding:11px 0;border-bottom:1px solid var(--hair);font-size:13.5px;}
+.tl div:last-child{border-bottom:none;}
+.tl span.w{flex:0 0 86px;color:var(--plum);}
+
+/* ---- faq ---- */
+.faq details{border-bottom:1px solid var(--hair);}
+.faq summary{
+  list-style:none;cursor:pointer;padding:20px 34px 20px 0;position:relative;
+  font-size:15px;line-height:1.8;font-weight:500;
+}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{
+  content:"";position:absolute;right:6px;top:30px;width:9px;height:9px;
+  border-right:1px solid var(--plum);border-bottom:1px solid var(--plum);
+  transform:rotate(45deg);transition:transform .25s ease;
+}
+.faq details[open] summary::after{transform:rotate(-135deg);}
+.faq summary:focus-visible{outline:2px solid var(--plum);outline-offset:2px;}
+.faq .a{padding:0 0 24px;font-size:14px;color:#413C41;}
+.faq .a p{margin:0 0 14px;}
+.faq .a p:last-child{margin-bottom:0;}
+
+/* ---- closing ---- */
+.closing{background:var(--veil);text-align:center;}
+.closing .msg{font-family:var(--mincho);font-size:19px;line-height:2.2;margin:0 0 14px;letter-spacing:.06em;}
+.closing .sub{font-size:13.5px;color:var(--muted);margin:0 0 36px;}
+
+footer{padding:44px 0 54px;text-align:center;font-size:12px;color:var(--muted);letter-spacing:.08em;}
+footer a{text-decoration:none;margin:0 10px;}
+
+/* ---- mock banner ---- */
+.mock{
+  background:var(--plum);color:#fff;font-size:12px;text-align:center;
+  padding:9px 16px;letter-spacing:.05em;line-height:1.7;
+}
+
+@media(max-width:600px){
+  section{padding:64px 0;}
+  .hero-inner{padding:70px 24px 64px;}
+  .hero .catch{font-size:23px;}
+  .cases{margin:0 -5px;}
+  .case{width:calc(50% - 10px);margin:0 5px 10px;}
+  h2.head{font-size:20px;}
+  .axis::before{display:none;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="mock">これは仮組みです。写真は入っていません。文章と全体の雰囲気を見てください。</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="portrait">プロフィール写真<br>が入ります</div>
+    <h1>はる｜アートメイク看護師</h1>
+    <p class="catch">ナチュラルで<br>大人カワイイを叶える</p>
+    <p class="place">東京・恵比寿</p>
+    <a class="btn-line" href="#contact">LINEで相談する</a>
+    <span class="btn-note">ご予約・料金・施術場所のご案内はLINEから</span>
+  </div>
+</header>
+
+<div class="award">
+  <div class="wrap">
+    <p class="t">Global Beauty Health &amp; Culture World Championship 2026 JAPAN<br>
+    <span class="r">マシンパウダー部門 第4位</span></p>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<section>
+  <div class="wrap">
+    <h2 class="head">はじめまして</h2>
+    <p class="head-ja">ABOUT</p>
+    <div class="narrow profile">
+      <p>大学病院の救急で5年間働いていました。</p>
+      <p>その中で、助けられない命もありました。自分の無力さも、目の前で人が亡くなることに慣れていく自分も、嫌で。5年と決めて、辞めました。</p>
+      <p>次は「死」ではなく「生」にフォーカスしたい。看護師の資格を使ってそれができるのが、美容看護師でした。</p>
+      <p>きれいでいたい、悩みをなくしたい。それって、生きている人の欲じゃないですか。生きているから、幸せに生きていきたいから、悩む。目が二重になるだけで鏡を見るたびに嬉しくなったり、身体のラインが変わるだけで、好きな服を自信を持って着られるようになったり。外科がメインだったので、勇気を出して手術を受けて、変わって喜んでいる方を見るのが本当に嬉しかったんです。</p>
+      <p>でもそれは、あくまで医師がやっていること。私はその補助でした。先生たちはすごいんです。自分の技術で、患者さんの人生を変えてしまえる。近くで見ていたからこそ、私も看護師として、自分の手で直接その人の人生に関わりたいと思うようになりました。</p>
+      <p>看護師が、自分の責任で人の肌に傷をつけられる施術は、アートメイクしかありません。だから、この世界に飛び込みました。</p>
+      <p>反応がダイレクトに返ってくるので、正直こわいです。そのぶん、喜んでもらえたときは本当に嬉しい。この仕事を通して出会えた一人ひとりとのご縁を、大切にしていきたいと思っています。</p>
+      <p class="sig">はる</p>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="tint">
+  <div class="wrap">
+    <h2 class="head">施術例</h2>
+    <p class="head-ja">CASE</p>
+    <div class="cases">
+      <div class="case"><span>before / after<br>①</span></div>
+      <div class="case"><span>before / after<br>②</span></div>
+      <div class="case"><span>before / after<br>③</span></div>
+      <div class="case"><span>before / after<br>④</span></div>
+      <div class="case"><span>before / after<br>⑤</span></div>
+      <div class="case"><span>before / after<br>⑥</span></div>
+    </div>
+    <p class="case-note">
+      写真の下に、施術内容・費用・リスクと副作用を1枚ずつ記載します。<br>
+      記載例：眉アートメイク（2回）／費用はLINEにてご案内／腫れ・赤み・色ムラ・感染などが生じる可能性があります。効果や持続期間には個人差があります。
+    </p>
+  </div>
+</section>
+
+<!-- ABOUT ARTMAKE -->
+<section>
+  <div class="wrap">
+    <h2 class="head">アートメイクについて</h2>
+    <p class="head-ja">ABOUT ARTMAKE</p>
+    <div class="narrow">
+      <dl class="dl">
+        <dt>2回で仕上げていきます</dt>
+        <dd>1回目で土台をつくり、2回目で色の入り方や形を確認しながら、足りない部分を補い、左右差や形を整えていきます。肌質によってはそれ以上必要な方もいらっしゃいます。</dd>
+
+        <dt>どのくらい残りますか</dt>
+        <dd>個人差はありますが、1〜2年ほどかけて徐々に薄くなっていきます。</dd>
+
+        <dt>デザインの考え方</dt>
+        <dd>普段の眉の好み・もともとの眉毛の位置・お顔全体のバランス。この3つを合わせて、すっぴんでも自然に見える形に調整しています。</dd>
+
+        <dt>ダウンタイム</dt>
+        <dd>
+          目安は1週間ほどです。その間、施術部位はワセリンで保護していただきます。
+          <div class="tl">
+            <div><span class="w">直後〜当日</span><span>赤みやひりつきを感じます。</span></div>
+            <div><span class="w">1〜2日目</span><span>傷が治る過程で少し腫れたり、色素が表面に上がってくるため、最も濃く見える時期です。</span></div>
+            <div><span class="w">3〜7日目</span><span>皮膚の表面が少しずつ剥がれ、余分な色素も一緒に取れていきます。乾燥やかゆみも出やすくなります。</span></div>
+          </div>
+        </dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="tint">
+  <div class="wrap">
+    <h2 class="head">施術の流れ</h2>
+    <p class="head-ja">FLOW</p>
+    <div class="narrow">
+      <ol class="steps">
+        <li><span class="st">LINEでご相談</span><span class="sd">ご希望やご不安なことをお聞かせください。ご予約前に問診表のご記入をお願いしています。</span></li>
+        <li><span class="st">カウンセリング</span><span class="sd">お顔全体のバランスを見ながら、ご希望をうかがいます。</span></li>
+        <li><span class="st">デザイン</span><span class="sd">ご納得いただけるまで調整します。気になるところはその場でお伝えください。</span></li>
+        <li><span class="st">施術</span><span class="sd">麻酔を使用し、途中で追加もできます。つらいときは我慢せずお声がけください。</span></li>
+        <li><span class="st">アフターケアのご説明</span><span class="sd">1週間のお手入れ方法をお伝えします。カウンセリングを含めて3時間程度です。</span></li>
+        <li><span class="st">2回目（1ヶ月後〜）</span><span class="sd">色の入り方を確認し、形を整えて仕上げます。2ヶ月以内にお越しいただくのがおすすめです。</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- CAUTIONS -->
+<section>
+  <div class="wrap">
+    <h2 class="head">受ける前に知っておいてほしいこと</h2>
+    <p class="head-ja">BEFORE YOU BOOK</p>
+    <div class="narrow">
+      <div class="cau">
+        <h3>施術をお受けいただけない方</h3>
+        <ul>
+          <li>妊娠中、または妊娠の可能性のある方</li>
+          <li>局所麻酔薬（リドカイン等）にアレルギーのある方</li>
+          <li>金属アレルギーのある方</li>
+          <li>心臓病、重度の糖尿病の方</li>
+          <li>抗凝固薬・抗血小板薬を使用されている方</li>
+          <li>ケロイド、肥厚性瘢痕になりやすい方</li>
+          <li>施術箇所に皮膚疾患や大きな傷、怪我のある方</li>
+          <li>C型肝炎、B型肝炎、梅毒、HIVなどの感染症のある方</li>
+          <li>ペースメーカーをご使用中の方</li>
+        </ul>
+      </div>
+
+      <div class="cau soft">
+        <h3>状態によってご相談が必要な方</h3>
+        <ul>
+          <li>アトピー性皮膚炎の方（炎症が出ている場合は、悪化や定着に影響が出る可能性があります）</li>
+          <li>施術箇所に傷跡のある方（赤みが引いて半年以上経過していればお受けできる場合があります）</li>
+        </ul>
+        <p class="cau-tail">当てはまる場合でも、お受けできることがあります。まずはLINEにてご相談ください。</p>
+      </div>
+
+      <div class="cau">
+        <h3>リスクと副作用</h3>
+        <ul>
+          <li>腫れ、赤み、ひりつきが生じることがあります</li>
+          <li>色ムラや左右差が出ることがあり、2回目で調整します</li>
+          <li>感染やアレルギー反応が生じる可能性があります</li>
+          <li>一度入れた色素を完全に取り除くことは難しく、除去には別の施術が必要になります</li>
+          <li>効果や持続期間、色の入り方には個人差があります</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="tint">
+  <div class="wrap">
+    <h2 class="head">よくあるご質問</h2>
+    <p class="head-ja">Q &amp; A</p>
+    <div class="narrow faq">
+
+      <details open>
+        <summary>痛みはありますか？</summary>
+        <div class="a">
+          <p>針で皮膚に傷をつけていくため、「痛くない」とは言い切れません。引っかかれるような感覚はあります。</p>
+          <p>ただ、麻酔を使用し、施術中も都度追加していきますので、実際にはほとんどの方が眠ってしまわれます。これまで「痛くてつらい」とおっしゃった方にはお会いしていません。私自身が施術を受けたときも眠っていました。</p>
+          <p>つらいときは我慢せず、いつでもお声がけください。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>なぜ1回では定着しないのですか？　2回必要ですか？</summary>
+        <div class="a">
+          <p>アートメイクで入れる色素は、身体にとっては異物です。1回目は、施術でついた傷を治すのと同時に、色素を外に出そうとする力が強く働きます。そのため部分的に薄くなってムラに見えたり、欠けて左右差が出たりすることが多くあります。</p>
+          <p>2回目は、1回目の色の入り方や形を確認しながら、足りない部分を補い、左右差や形を調整して仕上げていきます。1回目で土台をつくり、2回目で仕上がりを整えていくため、2回の施術をおすすめしています。</p>
+          <p>肌質によってはそれ以上必要な方もいらっしゃいます。個人差はありますが、1〜2年ほどで徐々に薄くなっていきます。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>普段のメイクと同じ形で入れられますか？</summary>
+        <div class="a">
+          <p>一度入れた色は残るものなので、メイクとまったく同じ位置に入れると、すっぴんのときに自眉とのズレが目立ったり、表情を変えたときに不自然に見えたりすることがあります。</p>
+          <p>そのため、普段の眉の好み・もともとの眉毛の位置・お顔全体のバランスの3つを合わせて、すっぴんでも自然に見える形に調整しています。</p>
+          <p>デザインの段階で可能な限りご希望をお伺いします。気になるところがあれば、その場ですぐお伝えください。</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>他の施術との間隔はどのくらい空けますか？</summary>
+        <div class="a">
+          <div class="tl">
+            <div><span class="w">1回目と2回目</span><span>1ヶ月以上空けてください。2ヶ月以内にお越しいただくのがおすすめです。</span></div>
+            <div><span class="w">他院での施術</span><span>同じく1ヶ月以上。残っている色素の状態によってはお受けできない場合があります。前回使用された色素が異なるため、ご希望どおりの仕上がりになるとは限りません。</span></div>
+            <div><span class="w">レーザー等</span><span>レーザー・ボトックス・ヒアルロン酸は、アートメイクの前に2週間。アートメイク後については、施術を受けられるクリニックにご確認ください。</span></div>
+            <div><span class="w">目元の手術</span><span>2ヶ月以上空けたうえで、担当の医師から許可が出ている場合に限ります。</span></div>
+            <div><span class="w">眉下切開</span><span>半年以上経過し、赤みが引いていることが条件です。赤みが引くまでには1年ほどかかることが多いです。</span></div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>施術時間はどのくらいですか？</summary>
+        <div class="a"><p>カウンセリングを含めて3時間程度です。</p></div>
+      </details>
+
+      <details>
+        <summary>料金と施術場所を教えてください</summary>
+        <div class="a"><p>LINEにて個別にご案内しております。ご相談だけでもお気軽にどうぞ。</p></div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing" id="contact">
+  <div class="wrap">
+    <p class="msg">まずは、お話を聞かせてください</p>
+    <p class="sub">ご予約・料金・施術場所のご案内はLINEから。<br>ご相談だけでも大丈夫です。</p>
+    <a class="btn-line" href="#">LINEで相談する</a>
+  </div>
+</section>
+
+<footer>
+  <a href="#">Instagram</a>
+  <div style="margin-top:18px;">はる｜アートメイク看護師</div>
+</footer>
+
+</body>
+</html>
