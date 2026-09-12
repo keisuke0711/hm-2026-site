@@ -16,187 +16,228 @@
   --ink:#2A262A;
   --muted:#877E84;
   --plum:#6E4F5E;
-  --line-green:#06C755;
+  --green:#06C755;
   --hair:#DED5DA;
-  --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho","Noto Serif CJK JP","Noto Serif JP",serif;
+  --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho","Noto Serif CJK JP",serif;
   --gothic:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP","Noto Sans CJK JP",sans-serif;
+  --e:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
 body{
   margin:0;background:var(--paper);color:var(--ink);
   font-family:var(--gothic);font-size:15px;line-height:2.0;
   -webkit-font-smoothing:antialiased;font-feature-settings:"palt";
+  overflow-x:hidden;
 }
 img{max-width:100%;display:block;}
 a{color:inherit;}
 .wrap{max-width:740px;margin:0 auto;padding:0 24px;}
 .narrow{max-width:600px;margin:0 auto;}
-
-/* ---- axis: 眉の左右対称を構造に ---- */
-.axis{position:relative;}
-.axis::before{
-  content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;
-  background:var(--hair);opacity:.5;
-}
-
-h2.head{
-  font-family:var(--mincho);font-weight:500;font-size:23px;line-height:1.7;
-  text-align:center;margin:0 0 8px;letter-spacing:.06em;
-}
-.head-ja{
-  text-align:center;color:var(--muted);font-size:12px;letter-spacing:.16em;
-  margin:0 0 40px;
-}
-section{padding:82px 0;}
+section{padding:92px 0;}
 section.tint{background:var(--veil);}
 
-/* ---- hero ---- */
-.hero{padding:0;position:relative;background:var(--veil);}
-.hero-inner{max-width:740px;margin:0 auto;padding:96px 24px 84px;text-align:center;}
-.hero .portrait{
-  width:190px;height:190px;margin:0 auto 34px;border-radius:50%;
+.rise{display:block;overflow:hidden;}
+.rise > span{display:block;transform:translateY(110%);transition:transform 1.05s var(--e);}
+.on .rise > span{transform:translateY(0);}
+
+.draw{display:block;height:1px;background:var(--hair);transform:scaleX(0);transform-origin:left;transition:transform 1.1s var(--e);}
+.on .draw{transform:scaleX(1);}
+
+.fade{opacity:0;transform:translateY(14px);transition:opacity .9s var(--e),transform .9s var(--e);}
+.on .fade{opacity:1;transform:none;}
+
+h2.head{
+  font-family:var(--mincho);font-weight:500;font-size:24px;line-height:1.7;
+  text-align:center;margin:0 0 10px;letter-spacing:.08em;
+}
+.head-ja{
+  text-align:center;color:var(--muted);font-size:11px;letter-spacing:.2em;
+  margin:0 0 44px;
+}
+
+.hero{background:var(--veil);position:relative;overflow:hidden;}
+.hero-inner{max-width:740px;margin:0 auto;padding:104px 24px 92px;text-align:center;position:relative;z-index:2;}
+.portrait{
+  width:196px;height:196px;margin:0 auto 36px;border-radius:50%;
   background:var(--veil-deep);border:1px dashed #C6B7BF;
   display:flex;align-items:center;justify-content:center;
   color:#A2909A;font-size:11px;letter-spacing:.1em;text-align:center;line-height:1.8;
+  opacity:0;transform:scale(.92);
+  transition:opacity 1.2s var(--e),transform 1.4s var(--e);
 }
-.hero h1{
-  font-family:var(--mincho);font-weight:400;font-size:15px;letter-spacing:.3em;
-  margin:0 0 22px;color:var(--muted);
+.loaded .portrait{opacity:1;transform:scale(1);}
+.hero .nm{
+  font-family:var(--mincho);font-size:14px;letter-spacing:.34em;
+  margin:0 0 26px;color:var(--muted);opacity:0;transition:opacity 1s var(--e) .45s;
 }
+.loaded .hero .nm{opacity:1;}
 .hero .catch{
-  font-family:var(--mincho);font-size:29px;line-height:1.95;font-weight:500;
-  margin:0 0 26px;letter-spacing:.08em;
+  font-family:var(--mincho);font-size:30px;line-height:1.95;font-weight:500;
+  margin:0 0 28px;letter-spacing:.1em;
 }
-.hero .place{font-size:12px;letter-spacing:.22em;color:var(--muted);margin:0 0 40px;}
+.hero .catch .rise > span{transform:translateY(110%);transition:transform 1.05s var(--e) .55s;}
+.hero .catch .rise:nth-child(2) > span{transition-delay:.68s;}
+.loaded .hero .catch .rise > span{transform:translateY(0);}
+.hero .place{
+  font-size:11px;letter-spacing:.24em;color:var(--muted);margin:0 0 44px;
+  opacity:0;transition:opacity 1s var(--e) .95s;
+}
+.loaded .hero .place{opacity:1;}
+.hero .cta-wrap{opacity:0;transform:translateY(12px);transition:opacity .9s var(--e) 1.1s,transform .9s var(--e) 1.1s;}
+.loaded .hero .cta-wrap{opacity:1;transform:none;}
 
 .btn-line{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--line-green);color:#fff;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--green);color:#fff;text-decoration:none;
   font-weight:700;font-size:15px;letter-spacing:.06em;
-  padding:17px 44px;border-radius:999px;
-  box-shadow:0 6px 22px rgba(6,199,85,.22);
-  transition:transform .18s ease, box-shadow .18s ease;
+  padding:18px 46px;border-radius:999px;
+  transition:transform .3s var(--e),box-shadow .3s var(--e);
+  box-shadow:0 4px 18px rgba(6,199,85,.2);
 }
-.btn-line:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(6,199,85,.28);}
+.btn-line:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(6,199,85,.3);}
+.btn-line:active{transform:translateY(-1px);}
 .btn-line:focus-visible{outline:2px solid var(--plum);outline-offset:4px;}
-.btn-note{display:block;margin-top:14px;font-size:12px;color:var(--muted);letter-spacing:.04em;}
+.btn-note{display:block;margin-top:15px;font-size:11.5px;color:var(--muted);letter-spacing:.04em;}
 
-/* ---- award ---- */
-.award{
-  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
-  padding:26px 0;text-align:center;
+.scroll-hint{
+  position:absolute;left:50%;bottom:0;width:1px;height:52px;background:var(--hair);
+  overflow:hidden;z-index:2;
 }
-.award .t{font-family:var(--mincho);font-size:14px;line-height:2.1;letter-spacing:.04em;}
+.scroll-hint::after{
+  content:"";position:absolute;left:0;top:-52px;width:1px;height:52px;background:var(--plum);
+  animation:trickle 2.6s var(--e) infinite;
+}
+@keyframes trickle{0%{transform:translateY(0)}60%,100%{transform:translateY(104px)}}
+
+.award{padding:30px 0;text-align:center;}
+.award .t{font-family:var(--mincho);font-size:14px;line-height:2.1;letter-spacing:.04em;margin:0;}
 .award .r{color:var(--plum);font-weight:500;}
 
-/* ---- profile ---- */
-.profile p{margin:0 0 22px;}
-.profile p:last-child{margin-bottom:0;}
-.sig{text-align:right;font-family:var(--mincho);font-size:15px;letter-spacing:.2em;margin-top:34px;color:var(--muted);}
+.profile p{margin:0 0 24px;}
+.profile p:last-of-type{margin-bottom:0;}
+.sig{text-align:right;font-family:var(--mincho);font-size:15px;letter-spacing:.24em;margin-top:40px;color:var(--muted);}
 
-/* ---- cases ---- */
-.cases{display:flex;flex-wrap:wrap;margin:0 -8px;}
-.case{
-  width:calc(50% - 16px);margin:0 8px 16px;position:relative;
-  background:var(--paper);border:1px dashed #C6B7BF;
+.ba{
+  position:relative;width:100%;padding-top:75%;overflow:hidden;
+  border-radius:4px;cursor:ew-resize;touch-action:pan-y;user-select:none;
+  background:var(--veil-deep);
 }
-.case::before{content:"";display:block;padding-top:100%;}
-.case span{
-  position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;
-  color:#A2909A;font-size:11px;letter-spacing:.08em;text-align:center;line-height:1.9;
+.ba-layer{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;}
+.ba-before .ph{margin-left:14%;}
+.ba-after .ph{margin-left:auto;margin-right:14%;}
+.ba-after{background:#DCD2D8;}
+.ba-before{background:#EFEAEC;clip-path:inset(0 50% 0 0);}
+.ba-layer .ph{font-family:var(--mincho);font-size:13px;letter-spacing:.24em;color:#8E7C86;}
+.ba-tag{
+  position:absolute;top:14px;font-size:10px;letter-spacing:.2em;color:#fff;
+  background:rgba(42,38,42,.5);padding:5px 12px;border-radius:999px;
 }
-.case-note{
-  margin-top:22px;font-size:11.5px;line-height:1.95;color:var(--muted);
-  border-left:2px solid var(--hair);padding-left:14px;
+.ba-tag.l{left:14px;}
+.ba-tag.r{right:14px;}
+.ba-line{position:absolute;top:0;bottom:0;width:1px;background:#fff;left:50%;pointer-events:none;}
+.ba-knob{
+  position:absolute;top:50%;left:50%;width:44px;height:44px;margin:-22px 0 0 -22px;
+  border-radius:50%;background:#fff;border:1px solid var(--hair);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  pointer-events:none;transition:transform .3s var(--e);
 }
+.ba:hover .ba-knob{transform:scale(1.08);}
+.ba-knob i{width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;}
+.ba-knob i.a{border-right:5px solid var(--plum);}
+.ba-knob i.b{border-left:5px solid var(--plum);}
+.ba-cap{margin-top:14px;font-size:11.5px;color:var(--muted);line-height:1.9;}
+.ba-hint{text-align:center;font-size:11.5px;color:var(--muted);margin:0 0 22px;letter-spacing:.06em;}
 
-/* ---- steps ---- */
+.case-grid{display:flex;flex-wrap:wrap;margin:26px -6px 0;}
+.case-cell{width:calc(50% - 12px);margin:0 6px 12px;position:relative;background:var(--paper);border:1px dashed #C6B7BF;}
+.case-cell::before{content:"";display:block;padding-top:100%;}
+.case-cell span{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;color:#A2909A;font-size:11px;text-align:center;line-height:1.9;}
+
+.dl{margin:0;}
+.dl dt{font-family:var(--mincho);font-size:16px;margin:0 0 8px;letter-spacing:.05em;}
+.dl dd{margin:0 0 32px;font-size:14.5px;color:#413C41;}
+.dl dd:last-child{margin-bottom:0;}
+.tl{margin:18px 0 0;}
+.tl div{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--hair);font-size:13.5px;line-height:1.85;}
+.tl div:last-child{border-bottom:none;}
+.tl .w{flex:0 0 86px;color:var(--plum);}
+
 .steps{counter-reset:s;list-style:none;padding:0;margin:0;}
-.steps li{
-  counter-increment:s;position:relative;padding:0 0 30px 46px;
-}
+.steps li{counter-increment:s;position:relative;padding:0 0 34px 48px;}
 .steps li::before{
   content:counter(s);position:absolute;left:0;top:2px;
-  width:27px;height:27px;border-radius:50%;border:1px solid var(--plum);
+  width:28px;height:28px;border-radius:50%;border:1px solid var(--plum);
   color:var(--plum);font-size:12px;display:flex;align-items:center;justify-content:center;
-  font-family:var(--mincho);
+  font-family:var(--mincho);z-index:1;
 }
-.steps li::after{
-  content:"";position:absolute;left:13px;top:33px;bottom:4px;width:1px;background:var(--hair);
-}
+.steps li::after{content:"";position:absolute;left:13.5px;top:34px;bottom:4px;width:1px;background:var(--hair);transform:scaleY(0);transform-origin:top;transition:transform .8s var(--e);}
+.on .steps li::after{transform:scaleY(1);}
+.on .steps li:nth-child(2)::after{transition-delay:.1s;}
+.on .steps li:nth-child(3)::after{transition-delay:.2s;}
+.on .steps li:nth-child(4)::after{transition-delay:.3s;}
+.on .steps li:nth-child(5)::after{transition-delay:.4s;}
 .steps li:last-child{padding-bottom:0;}
 .steps li:last-child::after{display:none;}
 .steps .st{font-weight:500;display:block;margin-bottom:2px;}
 .steps .sd{font-size:13px;color:var(--muted);line-height:1.9;}
 
-/* ---- about artmake ---- */
-.dl{margin:0;}
-.dl dt{font-family:var(--mincho);font-size:16px;margin:0 0 6px;letter-spacing:.04em;}
-.dl dd{margin:0 0 28px;font-size:14.5px;color:#413C41;}
-.dl dd:last-child{margin-bottom:0;}
-
-/* ---- cautions ---- */
-.cau{margin-bottom:30px;}
-.cau h3{
-  font-family:var(--mincho);font-size:15px;font-weight:500;margin:0 0 14px;
-  padding-bottom:10px;border-bottom:1px solid var(--hair);letter-spacing:.05em;
-}
+.cau{margin-bottom:34px;}
+.cau h3{font-family:var(--mincho);font-size:15px;font-weight:500;margin:0 0 14px;padding-bottom:11px;border-bottom:1px solid var(--hair);letter-spacing:.06em;}
 .cau ul{margin:0;padding:0;list-style:none;}
-.cau li{position:relative;padding-left:18px;font-size:14px;margin-bottom:7px;line-height:1.85;}
+.cau li{position:relative;padding-left:18px;font-size:14px;margin-bottom:8px;line-height:1.85;}
 .cau li::before{content:"";position:absolute;left:2px;top:13px;width:5px;height:1px;background:var(--plum);}
 .cau.soft li::before{background:var(--muted);}
 .cau-tail{font-size:13px;color:var(--muted);margin-top:16px;}
 
-/* ---- timeline ---- */
-.tl{margin:18px 0 0;}
-.tl div{display:flex;gap:16px;padding:11px 0;border-bottom:1px solid var(--hair);font-size:13.5px;}
-.tl div:last-child{border-bottom:none;}
-.tl span.w{flex:0 0 86px;color:var(--plum);}
-
-/* ---- faq ---- */
-.faq details{border-bottom:1px solid var(--hair);}
-.faq summary{
-  list-style:none;cursor:pointer;padding:20px 34px 20px 0;position:relative;
-  font-size:15px;line-height:1.8;font-weight:500;
+.faq .item{border-bottom:1px solid var(--hair);}
+.faq button{
+  width:100%;background:none;border:0;font-family:inherit;color:inherit;text-align:left;
+  padding:22px 36px 22px 0;position:relative;font-size:15px;line-height:1.8;font-weight:500;
+  cursor:pointer;letter-spacing:.02em;
 }
-.faq summary::-webkit-details-marker{display:none;}
-.faq summary::after{
-  content:"";position:absolute;right:6px;top:30px;width:9px;height:9px;
+.faq button::after{
+  content:"";position:absolute;right:6px;top:32px;width:9px;height:9px;
   border-right:1px solid var(--plum);border-bottom:1px solid var(--plum);
-  transform:rotate(45deg);transition:transform .25s ease;
+  transform:rotate(45deg);transition:transform .4s var(--e);
 }
-.faq details[open] summary::after{transform:rotate(-135deg);}
-.faq summary:focus-visible{outline:2px solid var(--plum);outline-offset:2px;}
-.faq .a{padding:0 0 24px;font-size:14px;color:#413C41;}
-.faq .a p{margin:0 0 14px;}
-.faq .a p:last-child{margin-bottom:0;}
+.faq .item.open button::after{transform:rotate(-135deg);}
+.faq button:focus-visible{outline:2px solid var(--plum);outline-offset:2px;}
+.faq .body{overflow:hidden;height:0;transition:height .45s var(--e);}
+.faq .inner{padding:0 0 26px;font-size:14px;color:#413C41;}
+.faq .inner p{margin:0 0 14px;}
+.faq .inner p:last-child{margin-bottom:0;}
 
-/* ---- closing ---- */
 .closing{background:var(--veil);text-align:center;}
-.closing .msg{font-family:var(--mincho);font-size:19px;line-height:2.2;margin:0 0 14px;letter-spacing:.06em;}
-.closing .sub{font-size:13.5px;color:var(--muted);margin:0 0 36px;}
+.closing .sub{font-size:13.5px;color:var(--muted);margin:0 0 40px;}
+footer{padding:48px 0 60px;text-align:center;font-size:12px;color:var(--muted);letter-spacing:.1em;}
+footer a{text-decoration:none;}
 
-footer{padding:44px 0 54px;text-align:center;font-size:12px;color:var(--muted);letter-spacing:.08em;}
-footer a{text-decoration:none;margin:0 10px;}
-
-/* ---- mock banner ---- */
-.mock{
-  background:var(--plum);color:#fff;font-size:12px;text-align:center;
-  padding:9px 16px;letter-spacing:.05em;line-height:1.7;
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;padding:12px 18px calc(12px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.93);
+  border-top:1px solid var(--hair);
+  transform:translateY(115%);transition:transform .5s var(--e);
 }
+.dock.show{transform:translateY(0);}
+.dock a{display:block;width:100%;max-width:420px;margin:0 auto;padding:15px 0;font-size:14.5px;}
+
+.mock{background:var(--plum);color:#fff;font-size:12px;text-align:center;padding:9px 16px;letter-spacing:.05em;line-height:1.7;}
 
 @media(max-width:600px){
-  section{padding:64px 0;}
-  .hero-inner{padding:70px 24px 64px;}
-  .hero .catch{font-size:23px;}
-  .cases{margin:0 -5px;}
-  .case{width:calc(50% - 10px);margin:0 5px 10px;}
-  h2.head{font-size:20px;}
-  .axis::before{display:none;}
+  section{padding:70px 0;}
+  .hero-inner{padding:76px 24px 76px;}
+  .hero .catch{font-size:24px;}
+  h2.head{font-size:21px;}
 }
 @media(prefers-reduced-motion:reduce){
-  *{transition:none!important;scroll-behavior:auto!important;}
+  *{transition:none!important;animation:none!important;scroll-behavior:auto!important;}
+  .rise > span{transform:none!important;}
+  .fade{opacity:1!important;transform:none!important;}
+  .draw{transform:scaleX(1)!important;}
+  .portrait,.hero .nm,.hero .place,.hero .cta-wrap{opacity:1!important;transform:none!important;}
+  .steps li::after{transform:scaleY(1)!important;}
+  .scroll-hint{display:none;}
 }
 </style>
 </head>
@@ -204,31 +245,37 @@ footer a{text-decoration:none;margin:0 10px;}
 
 <div class="mock">これは仮組みです。写真は入っていません。文章と全体の雰囲気を見てください。</div>
 
-<!-- HERO -->
 <header class="hero">
   <div class="hero-inner">
     <div class="portrait">プロフィール写真<br>が入ります</div>
-    <h1>はる｜アートメイク看護師</h1>
-    <p class="catch">ナチュラルで<br>大人カワイイを叶える</p>
+    <p class="nm">はる｜アートメイク看護師</p>
+    <p class="catch">
+      <span class="rise"><span>ナチュラルで</span></span>
+      <span class="rise"><span>大人カワイイを叶える</span></span>
+    </p>
     <p class="place">東京・恵比寿</p>
-    <a class="btn-line" href="#contact">LINEで相談する</a>
-    <span class="btn-note">ご予約・料金・施術場所のご案内はLINEから</span>
+    <div class="cta-wrap">
+      <a class="btn-line" href="#contact">LINEで相談する</a>
+      <span class="btn-note">ご予約・料金・施術場所のご案内はLINEから</span>
+    </div>
   </div>
+  <div class="scroll-hint"></div>
 </header>
 
-<div class="award">
+<div class="award reveal">
   <div class="wrap">
-    <p class="t">Global Beauty Health &amp; Culture World Championship 2026 JAPAN<br>
+    <span class="draw"></span>
+    <p class="t fade" style="padding:26px 0;">Global Beauty Health &amp; Culture World Championship 2026 JAPAN<br>
     <span class="r">マシンパウダー部門 第4位</span></p>
+    <span class="draw"></span>
   </div>
 </div>
 
-<!-- PROFILE -->
-<section>
+<section class="reveal">
   <div class="wrap">
-    <h2 class="head">はじめまして</h2>
-    <p class="head-ja">ABOUT</p>
-    <div class="narrow profile">
+    <h2 class="head"><span class="rise"><span>はじめまして</span></span></h2>
+    <p class="head-ja fade">ABOUT</p>
+    <div class="narrow profile fade">
       <p>大学病院の救急で5年間働いていました。</p>
       <p>その中で、助けられない命もありました。自分の無力さも、目の前で人が亡くなることに慣れていく自分も、嫌で。5年と決めて、辞めました。</p>
       <p>次は「死」ではなく「生」にフォーカスしたい。看護師の資格を使ってそれができるのが、美容看護師でした。</p>
@@ -241,45 +288,47 @@ footer a{text-decoration:none;margin:0 10px;}
   </div>
 </section>
 
-<!-- CASES -->
-<section class="tint">
+<section class="tint reveal">
   <div class="wrap">
-    <h2 class="head">施術例</h2>
-    <p class="head-ja">CASE</p>
-    <div class="cases">
-      <div class="case"><span>before / after<br>①</span></div>
-      <div class="case"><span>before / after<br>②</span></div>
-      <div class="case"><span>before / after<br>③</span></div>
-      <div class="case"><span>before / after<br>④</span></div>
-      <div class="case"><span>before / after<br>⑤</span></div>
-      <div class="case"><span>before / after<br>⑥</span></div>
+    <h2 class="head"><span class="rise"><span>施術例</span></span></h2>
+    <p class="head-ja fade">CASE</p>
+    <div class="narrow fade">
+      <p class="ba-hint">左右にスライドすると変化が見られます</p>
+      <div class="ba" id="ba">
+        <div class="ba-layer ba-after"><span class="ph">a f t e r</span></div>
+        <div class="ba-layer ba-before" id="baBefore"><span class="ph">b e f o r e</span></div>
+        <span class="ba-tag l">BEFORE</span>
+        <span class="ba-tag r">AFTER</span>
+        <div class="ba-line" id="baLine"></div>
+        <div class="ba-knob" id="baKnob"><i class="a"></i><i class="b"></i></div>
+      </div>
+      <p class="ba-cap">施術内容・費用・リスクと副作用を1枚ずつ記載します。<br>
+      記載例：眉アートメイク（2回）／費用はLINEにてご案内／腫れ・赤み・色ムラ・感染などが生じる可能性があります。効果や持続期間には個人差があります。</p>
+
+      <div class="case-grid">
+        <div class="case-cell"><span>症例②</span></div>
+        <div class="case-cell"><span>症例③</span></div>
+        <div class="case-cell"><span>症例④</span></div>
+        <div class="case-cell"><span>症例⑤</span></div>
+      </div>
     </div>
-    <p class="case-note">
-      写真の下に、施術内容・費用・リスクと副作用を1枚ずつ記載します。<br>
-      記載例：眉アートメイク（2回）／費用はLINEにてご案内／腫れ・赤み・色ムラ・感染などが生じる可能性があります。効果や持続期間には個人差があります。
-    </p>
   </div>
 </section>
 
-<!-- ABOUT ARTMAKE -->
-<section>
+<section class="reveal">
   <div class="wrap">
-    <h2 class="head">アートメイクについて</h2>
-    <p class="head-ja">ABOUT ARTMAKE</p>
-    <div class="narrow">
+    <h2 class="head"><span class="rise"><span>アートメイクについて</span></span></h2>
+    <p class="head-ja fade">ABOUT ARTMAKE</p>
+    <div class="narrow fade">
       <dl class="dl">
         <dt>2回で仕上げていきます</dt>
         <dd>1回目で土台をつくり、2回目で色の入り方や形を確認しながら、足りない部分を補い、左右差や形を整えていきます。肌質によってはそれ以上必要な方もいらっしゃいます。</dd>
-
         <dt>どのくらい残りますか</dt>
         <dd>個人差はありますが、1〜2年ほどかけて徐々に薄くなっていきます。</dd>
-
         <dt>デザインの考え方</dt>
         <dd>普段の眉の好み・もともとの眉毛の位置・お顔全体のバランス。この3つを合わせて、すっぴんでも自然に見える形に調整しています。</dd>
-
         <dt>ダウンタイム</dt>
-        <dd>
-          目安は1週間ほどです。その間、施術部位はワセリンで保護していただきます。
+        <dd>目安は1週間ほどです。その間、施術部位はワセリンで保護していただきます。
           <div class="tl">
             <div><span class="w">直後〜当日</span><span>赤みやひりつきを感じます。</span></div>
             <div><span class="w">1〜2日目</span><span>傷が治る過程で少し腫れたり、色素が表面に上がってくるため、最も濃く見える時期です。</span></div>
@@ -291,12 +340,11 @@ footer a{text-decoration:none;margin:0 10px;}
   </div>
 </section>
 
-<!-- FLOW -->
-<section class="tint">
+<section class="tint reveal">
   <div class="wrap">
-    <h2 class="head">施術の流れ</h2>
-    <p class="head-ja">FLOW</p>
-    <div class="narrow">
+    <h2 class="head"><span class="rise"><span>施術の流れ</span></span></h2>
+    <p class="head-ja fade">FLOW</p>
+    <div class="narrow fade">
       <ol class="steps">
         <li><span class="st">LINEでご相談</span><span class="sd">ご希望やご不安なことをお聞かせください。ご予約前に問診表のご記入をお願いしています。</span></li>
         <li><span class="st">カウンセリング</span><span class="sd">お顔全体のバランスを見ながら、ご希望をうかがいます。</span></li>
@@ -309,12 +357,11 @@ footer a{text-decoration:none;margin:0 10px;}
   </div>
 </section>
 
-<!-- CAUTIONS -->
-<section>
+<section class="reveal">
   <div class="wrap">
-    <h2 class="head">受ける前に知っておいてほしいこと</h2>
-    <p class="head-ja">BEFORE YOU BOOK</p>
-    <div class="narrow">
+    <h2 class="head"><span class="rise"><span>受ける前に知っておいてほしいこと</span></span></h2>
+    <p class="head-ja fade">BEFORE YOU BOOK</p>
+    <div class="narrow fade">
       <div class="cau">
         <h3>施術をお受けいただけない方</h3>
         <ul>
@@ -329,7 +376,6 @@ footer a{text-decoration:none;margin:0 10px;}
           <li>ペースメーカーをご使用中の方</li>
         </ul>
       </div>
-
       <div class="cau soft">
         <h3>状態によってご相談が必要な方</h3>
         <ul>
@@ -338,7 +384,6 @@ footer a{text-decoration:none;margin:0 10px;}
         </ul>
         <p class="cau-tail">当てはまる場合でも、お受けできることがあります。まずはLINEにてご相談ください。</p>
       </div>
-
       <div class="cau">
         <h3>リスクと副作用</h3>
         <ul>
@@ -353,43 +398,42 @@ footer a{text-decoration:none;margin:0 10px;}
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="tint">
+<section class="tint reveal">
   <div class="wrap">
-    <h2 class="head">よくあるご質問</h2>
-    <p class="head-ja">Q &amp; A</p>
-    <div class="narrow faq">
+    <h2 class="head"><span class="rise"><span>よくあるご質問</span></span></h2>
+    <p class="head-ja fade">Q &amp; A</p>
+    <div class="narrow faq fade" id="faq">
 
-      <details open>
-        <summary>痛みはありますか？</summary>
-        <div class="a">
+      <div class="item open">
+        <button type="button" aria-expanded="true">痛みはありますか？</button>
+        <div class="body"><div class="inner">
           <p>針で皮膚に傷をつけていくため、「痛くない」とは言い切れません。引っかかれるような感覚はあります。</p>
           <p>ただ、麻酔を使用し、施術中も都度追加していきますので、実際にはほとんどの方が眠ってしまわれます。これまで「痛くてつらい」とおっしゃった方にはお会いしていません。私自身が施術を受けたときも眠っていました。</p>
           <p>つらいときは我慢せず、いつでもお声がけください。</p>
-        </div>
-      </details>
+        </div></div>
+      </div>
 
-      <details>
-        <summary>なぜ1回では定着しないのですか？　2回必要ですか？</summary>
-        <div class="a">
+      <div class="item">
+        <button type="button" aria-expanded="false">なぜ1回では定着しないのですか？　2回必要ですか？</button>
+        <div class="body"><div class="inner">
           <p>アートメイクで入れる色素は、身体にとっては異物です。1回目は、施術でついた傷を治すのと同時に、色素を外に出そうとする力が強く働きます。そのため部分的に薄くなってムラに見えたり、欠けて左右差が出たりすることが多くあります。</p>
           <p>2回目は、1回目の色の入り方や形を確認しながら、足りない部分を補い、左右差や形を調整して仕上げていきます。1回目で土台をつくり、2回目で仕上がりを整えていくため、2回の施術をおすすめしています。</p>
           <p>肌質によってはそれ以上必要な方もいらっしゃいます。個人差はありますが、1〜2年ほどで徐々に薄くなっていきます。</p>
-        </div>
-      </details>
+        </div></div>
+      </div>
 
-      <details>
-        <summary>普段のメイクと同じ形で入れられますか？</summary>
-        <div class="a">
+      <div class="item">
+        <button type="button" aria-expanded="false">普段のメイクと同じ形で入れられますか？</button>
+        <div class="body"><div class="inner">
           <p>一度入れた色は残るものなので、メイクとまったく同じ位置に入れると、すっぴんのときに自眉とのズレが目立ったり、表情を変えたときに不自然に見えたりすることがあります。</p>
           <p>そのため、普段の眉の好み・もともとの眉毛の位置・お顔全体のバランスの3つを合わせて、すっぴんでも自然に見える形に調整しています。</p>
           <p>デザインの段階で可能な限りご希望をお伺いします。気になるところがあれば、その場ですぐお伝えください。</p>
-        </div>
-      </details>
+        </div></div>
+      </div>
 
-      <details>
-        <summary>他の施術との間隔はどのくらい空けますか？</summary>
-        <div class="a">
+      <div class="item">
+        <button type="button" aria-expanded="false">他の施術との間隔はどのくらい空けますか？</button>
+        <div class="body"><div class="inner">
           <div class="tl">
             <div><span class="w">1回目と2回目</span><span>1ヶ月以上空けてください。2ヶ月以内にお越しいただくのがおすすめです。</span></div>
             <div><span class="w">他院での施術</span><span>同じく1ヶ月以上。残っている色素の状態によってはお受けできない場合があります。前回使用された色素が異なるため、ご希望どおりの仕上がりになるとは限りません。</span></div>
@@ -397,36 +441,114 @@ footer a{text-decoration:none;margin:0 10px;}
             <div><span class="w">目元の手術</span><span>2ヶ月以上空けたうえで、担当の医師から許可が出ている場合に限ります。</span></div>
             <div><span class="w">眉下切開</span><span>半年以上経過し、赤みが引いていることが条件です。赤みが引くまでには1年ほどかかることが多いです。</span></div>
           </div>
-        </div>
-      </details>
+        </div></div>
+      </div>
 
-      <details>
-        <summary>施術時間はどのくらいですか？</summary>
-        <div class="a"><p>カウンセリングを含めて3時間程度です。</p></div>
-      </details>
+      <div class="item">
+        <button type="button" aria-expanded="false">施術時間はどのくらいですか？</button>
+        <div class="body"><div class="inner"><p>カウンセリングを含めて3時間程度です。</p></div></div>
+      </div>
 
-      <details>
-        <summary>料金と施術場所を教えてください</summary>
-        <div class="a"><p>LINEにて個別にご案内しております。ご相談だけでもお気軽にどうぞ。</p></div>
-      </details>
+      <div class="item">
+        <button type="button" aria-expanded="false">料金と施術場所を教えてください</button>
+        <div class="body"><div class="inner"><p>LINEにて個別にご案内しております。ご相談だけでもお気軽にどうぞ。</p></div></div>
+      </div>
 
     </div>
   </div>
 </section>
 
-<!-- CLOSING -->
-<section class="closing" id="contact">
+<section class="closing reveal" id="contact">
   <div class="wrap">
-    <p class="msg">まずは、お話を聞かせてください</p>
-    <p class="sub">ご予約・料金・施術場所のご案内はLINEから。<br>ご相談だけでも大丈夫です。</p>
-    <a class="btn-line" href="#">LINEで相談する</a>
+    <h2 class="head" style="margin-bottom:16px;"><span class="rise"><span>まずは、お話を聞かせてください</span></span></h2>
+    <p class="sub fade">ご予約・料金・施術場所のご案内はLINEから。<br>ご相談だけでも大丈夫です。</p>
+    <div class="fade"><a class="btn-line" href="#">LINEで相談する</a></div>
   </div>
 </section>
 
 <footer>
   <a href="#">Instagram</a>
-  <div style="margin-top:18px;">はる｜アートメイク看護師</div>
+  <div style="margin-top:20px;">はる｜アートメイク看護師</div>
 </footer>
 
+<div class="dock" id="dock"><a class="btn-line" href="#">LINEで相談する</a></div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  requestAnimationFrame(function(){ document.body.classList.add('loaded'); });
+
+  var targets = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){
+    Array.prototype.forEach.call(targets, function(t){ t.classList.add('on'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.1, rootMargin:'0px 0px -6% 0px'});
+    Array.prototype.forEach.call(targets, function(t){ io.observe(t); });
+  }
+
+  var ba=document.getElementById('ba'), bf=document.getElementById('baBefore'),
+      bl=document.getElementById('baLine'), bk=document.getElementById('baKnob'), dragging=false;
+  function setBA(p){
+    p = Math.max(0, Math.min(100, p));
+    bf.style.clipPath = 'inset(0 ' + (100-p) + '% 0 0)';
+    bl.style.left = p + '%';
+    bk.style.left = p + '%';
+  }
+  function posFromEvent(ev){
+    var r = ba.getBoundingClientRect();
+    var x = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
+    return x / r.width * 100;
+  }
+  function start(ev){ dragging = true; setBA(posFromEvent(ev)); }
+  function move(ev){ if(!dragging) return; if(ev.cancelable) ev.preventDefault(); setBA(posFromEvent(ev)); }
+  function end(){ dragging = false; }
+  if(ba){
+    ba.addEventListener('mousedown', start);
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', end);
+    ba.addEventListener('touchstart', start, {passive:true});
+    window.addEventListener('touchmove', move, {passive:false});
+    window.addEventListener('touchend', end);
+  }
+
+  var faq = document.getElementById('faq');
+  if(faq){
+    Array.prototype.forEach.call(faq.querySelectorAll('.item'), function(item){
+      var btn = item.querySelector('button'), body = item.querySelector('.body');
+      if(item.classList.contains('open')){ body.style.height = 'auto'; }
+      btn.addEventListener('click', function(){
+        if(item.classList.contains('open')){
+          body.style.height = body.scrollHeight + 'px';
+          requestAnimationFrame(function(){ body.style.height = '0px'; });
+          item.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        } else {
+          body.style.height = body.scrollHeight + 'px';
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded','true');
+          body.addEventListener('transitionend', function te(){
+            body.style.height = 'auto';
+            body.removeEventListener('transitionend', te);
+          });
+        }
+      });
+    });
+  }
+
+  var dock = document.getElementById('dock'), hero = document.querySelector('.hero'), closing = document.getElementById('contact');
+  function onScroll(){
+    var past = window.scrollY > hero.offsetHeight * 0.9;
+    var atEnd = closing.getBoundingClientRect().top < window.innerHeight * 0.9;
+    if(past && !atEnd){ dock.classList.add('show'); } else { dock.classList.remove('show'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
 </body>
 </html>
